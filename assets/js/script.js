@@ -91,7 +91,7 @@ function renderBtns() {
     var btn = $("<button>");
     btn.addClass("btn btn-outline-success float-right");
     btn.text(pastSearches[i]);
-    buttonContainer.prepend(btn);
+    buttonContainer.append(btn);
   }
 }
 
@@ -105,8 +105,9 @@ $("#city-search").on("click", function(event) {
 });
 
 $("#history-buttons").on("click", function(event) {
-  if (event.target.matches("#button")) {
+  if (event.target.matches(".btn")) {
     var query = event.target.textContent;
+    console.log(query);
     getCoords(query);
   }
 });
