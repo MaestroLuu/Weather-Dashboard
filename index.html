@@ -16,26 +16,20 @@
         </form>
     </nav>
 
-    <div class="card w-75 text-center">
+    <div class="card w-100 text-center">
         <div class="card-body">
           <h5 class="card-title">Current Forecast</h5>
+          <h6 class="card-subtitle mb-2 text-muted" id="time-display"></h6>
           <h6 class="card-subtitle mb-2 text-muted" id="city-display"></h6>
-          <p class="card-text" id="data-display">Current weather will display here</p>
+          <div class="card-text" id="temperature"></div>
+          <div class="card-text" id="wind-speed"></div>
+          <div class="card-text" id="humidity"></div>
+          <div class="card-text" id="uv-index"></div>
         </div>
       </div>
-
-      <section class="card w-75">
-        <div class="card-body">
-            <div class="upcoming-forecast">
-                <div class="upcoming-days" id="day-1">day-1</div>
-                <div class="upcoming-days" id="day-2">day-2</div>
-                <div class="upcoming-days" id="day-3">day-3</div>
-                <div class="upcoming-days" id="day-4">day-4</div>
-                <div class="upcoming-days" id="day-5">day-5</div>
-            </div>
-        </div>
+    <section class="row" id="upcoming-forecast">
     </section>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
