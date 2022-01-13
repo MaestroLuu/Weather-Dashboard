@@ -4,6 +4,9 @@ var temperature = $("#temperature");
 var windSpeed = $("#wind-speed");
 var humidityEl = $("#humidity");
 var uviEl = $("#uv-index");
+var buttonContainer = $("#history-buttons");
+var pastSearches = [];
+
 var time = moment().format("MMMM Do, YYYY h:mma");
 timeEl.text(time);
 
@@ -20,7 +23,6 @@ function fetchWeather(lat, lon) {
       return response.json();
     })
     .then(function (data) {      
-      console.log(data);  
       var temp = data.current.temp;
       var wind = data.current.wind_speed;
       var humidity = data.current.humidity;
@@ -66,7 +68,6 @@ function fetchWeather(lat, lon) {
       forecastDisplay.append(dailyHumidity);
 
       $("#upcoming-forecast").append(forecastDisplay);
-      
     }
     });
 }
@@ -80,14 +81,39 @@ function getCoords(search) {
             return response.json();
     })
     .then(function (data) {
-        console.log(data);
         cityName.text(data[0].name);
         fetchWeather(data[0].lat, data[0].lon);
     });
 }
 
+function renderBtns() {
+  for (i = 0; i <pastSearches.length; i++) {
+    var btn = $("<button>");
+    btn.addClass("btn btn-outline-success float-right");
+    btn.text(pastSearches[i]);
+    buttonContainer.prepend(btn);
+  }
+}
+
 $("#city-search").on("click", function(event) {
-    event.preventDefault();
-    var search = $("#city").val();
-    getCoords(search);
+  event.preventDefault();
+  var search = $("#city").val();
+  pastSearches.push(search);
+  localStorage.setItem("pastSearches", JSON.stringify(pastSearches));
+  renderBtns();  
+  getCoords(search);
 });
+
+$("#history-buttons").on("click", function(event) {
+  if (event.target.matches("#button")) {
+    var query = event.target.textContent;
+    getCoords(query);
+  }
+});
+
+pastSearches = JSON.parse(localStorage.getItem("pastSearches"));
+if (pastSearches === null) {
+  pastSearches = [];
+}
+
+renderBtns();
