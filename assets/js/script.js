@@ -44,7 +44,7 @@ function fetchWeather(lat, lon) {
 
     for (i = 0; i < 5; i++) {
       var forecastDisplay = $("<div>");
-      forecastDisplay.addClass("card col-sm-2 m-2");
+      forecastDisplay.addClass("card col-sm-2 m-2 search-results");
 
       var date = $("<h6>");
       date.text(moment().add(i, "days").format("ddd MMM Do"));
@@ -97,17 +97,21 @@ function renderBtns() {
 
 $("#city-search").on("click", function(event) {
   event.preventDefault();
+  $(".search-results").remove();
   var search = $("#city").val();
   pastSearches.push(search);
   localStorage.setItem("pastSearches", JSON.stringify(pastSearches));
-  renderBtns();  
+
+  var btn = $("<button>");
+  btn.addClass("btn btn-outline-success float-right search-results");
+  btn.text(search);
+  buttonContainer.append(btn);
   getCoords(search);
 });
 
 $("#history-buttons").on("click", function(event) {
   if (event.target.matches(".btn")) {
     var query = event.target.textContent;
-    console.log(query);
     getCoords(query);
   }
 });
